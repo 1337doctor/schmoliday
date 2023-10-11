@@ -1,8 +1,17 @@
-import {getTimezoneByCountryCode, getTimezoneByIdentifier} from "./util/datemate.ts";
+import {
+    getTimezoneByCountryCode,
+    getTimezoneByIdentifier,
+    getTimeZoneAbbreviations,
+    getTimeZoneByAbbreviation,
+    timezones
+} from "./util/datemate.ts";
 
 
 // @ts-ignore
 window.datemate = {
-    tzByCountryCode: getTimezoneByCountryCode,
-    tzByIdentifier: getTimezoneByIdentifier,
+    timezones,
+    getTimezoneByCountryCode,
+    getTimezoneByIdentifier,
+    getTimeZoneAbbreviations,
+    getTimeZoneByAbbreviation,
 };
