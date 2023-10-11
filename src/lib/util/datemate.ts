@@ -15,7 +15,7 @@ interface Timezone {
 
 export const timezones: Timezone[] = data;
 
-export const getTimezoneByCountryCode = (countrycode: string): Timezone[] => {
+export const getIanaTimezoneByCountryCode = (countrycode: string): Timezone[] => {
     return timezones.filter(
         (timezone) => timezone.countryCodes.findIndex(
             (code: string) => code.toLowerCase() === countrycode.toLowerCase()
@@ -23,11 +23,11 @@ export const getTimezoneByCountryCode = (countrycode: string): Timezone[] => {
     );
 }
 
-export const getTimezoneByIdentifier = (identifier: string): Timezone[] => timezones.filter(
+export const getIanaTimezoneByIdentifier = (identifier: string): Timezone[] => timezones.filter(
     (timezone: Timezone) => timezone.identifier.toLowerCase().indexOf(identifier.toLowerCase()) !== -1
 );
 
-export const getTimeZoneAbbreviations = (): string[] => Array.from(
+export const getIanaTimeZoneAbbreviations = (): string[] => Array.from(
     new Set(
         timezones.flatMap(
             (entry) => entry.abbr.dst !== null
@@ -37,8 +37,14 @@ export const getTimeZoneAbbreviations = (): string[] => Array.from(
     )
 ).sort()
 
-export const getTimeZoneByAbbreviation = (abbr: string): Timezone[] => timezones.filter(
+export const getIanaTimeZoneByAbbreviation = (abbr: string): Timezone[] => timezones.filter(
     (timezone: Timezone) => Object.values(timezone.abbr).findIndex(
         (entry)=> entry?.toLowerCase() === abbr.toLowerCase()
     ) !== -1
+);
+
+// @ts-ignore
+export const getIntlTimezoneIdentifiers = (): string[] => Intl.supportedValuesOf('timeZone');
+export const filterIntlTimezoneIdentifiers = (needle: string): string[] => getIntlTimezoneIdentifiers().filter(
+    (entry) => entry.toLowerCase().indexOf(needle.toLowerCase()) !== -1
 );

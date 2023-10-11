@@ -1,8 +1,10 @@
 import {
-    getTimezoneByCountryCode,
-    getTimezoneByIdentifier,
-    getTimeZoneAbbreviations,
-    getTimeZoneByAbbreviation,
+    getIanaTimezoneByCountryCode,
+    getIanaTimezoneByIdentifier,
+    getIanaTimeZoneAbbreviations,
+    getIanaTimeZoneByAbbreviation,
+    getIntlTimezoneIdentifiers,
+    filterIntlTimezoneIdentifiers,
     timezones
 } from "./util/datemate.ts";
 
@@ -10,8 +12,10 @@ import {
 // @ts-ignore
 window.datemate = {
     timezones,
-    getTimezoneByCountryCode,
-    getTimezoneByIdentifier,
-    getTimeZoneAbbreviations,
-    getTimeZoneByAbbreviation,
+    getIanaTimezoneByCountryCode,
+    getIanaTimezoneByIdentifier,
+    getIanaTimeZoneAbbreviations,
+    getIanaTimeZoneByAbbreviation,
+    getIntlTimezoneIdentifiers,
+    filterIntlTimezoneIdentifiers
 };
