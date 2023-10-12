@@ -15,8 +15,8 @@ interface Timezone {
 }
 
 export const timezones: Timezone[] = data;
-export const getIanaTimezoneByCountryCode = (countrycode: string): Timezone[] => {
-    return timezones.filter(
+export const getIanaTimezoneByCountryCode = (countrycode: string, tzList: Timezone[] = timezones): Timezone[] => {
+    return tzList.filter(
         (timezone) => {
             const countrycodeLowered = countrycode.toLowerCase();
             return timezone.countryCodes.findIndex(
@@ -28,19 +28,19 @@ export const getIanaTimezoneByCountryCode = (countrycode: string): Timezone[] =>
         }
     );
 }
-export const getIanaTimezoneByIdentifier = (identifier: string): Timezone[] => timezones.filter(
+export const getIanaTimezoneByIdentifier = (identifier: string, tzList: Timezone[] = timezones): Timezone[] => tzList.filter(
     (timezone: Timezone) => timezone.identifier.toLowerCase().indexOf(identifier.toLowerCase()) !== -1
 );
-export const getIanaTimeZoneAbbreviations = (): string[] => Array.from(
+export const getIanaTimeZoneAbbreviations = (tzList: Timezone[] = timezones): string[] => Array.from(
     new Set(
-        timezones.flatMap(
+        tzList.flatMap(
             (entry) => entry.abbr.dst !== null
                 ? [entry.abbr.dst, entry.abbr.std]
                 : [entry.abbr.std]
         )
     )
 ).sort()
-export const getIanaTimeZoneByAbbreviation = (abbr: string): Timezone[] => timezones.filter(
+export const getIanaTimeZoneByAbbreviation = (abbr: string, tzList: Timezone[] = timezones): Timezone[] => tzList.filter(
     (timezone: Timezone) => Object.values(timezone.abbr).findIndex(
         (entry) => entry?.toLowerCase() === abbr.toLowerCase()
     ) !== -1
@@ -64,3 +64,12 @@ export const getIanaTimezoneByLocaleAndIdentifier = (identifier: string, locale:
     );
 }
 
+export const getAbbrFromIanaTimeZone = (timezone: Timezone, date: Date) => dateIsDst(date) && timezone.abbr.dst
+    ? timezone.abbr.dst : timezone.abbr.std;
+
+export const getIanaTimezonesWithoutDST = (): Timezone[] => timezones.filter(
+    (timezone) => timezone.abbr.dst === null
+);
+export const getIanaTimezonesWithDST = (): Timezone[] => timezones.filter(
+    (timezone) => timezone.abbr.dst !== null
+);
