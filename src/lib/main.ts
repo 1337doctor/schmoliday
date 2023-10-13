@@ -11,6 +11,7 @@ import {
     getIanaTimezoneByLocaleFilterIdentifier, getAbbrFromIanaTimeZone, getIanaTimezonesWithDST
 } from "./util/datemate.ts";
 import {locale, canonicalLocale} from "./util/intl.ts";
+import { easterSpencer } from "./util/schmoliday.ts";
 
 const main = (): void => {
     if (typeof Intl === 'undefined') {
@@ -32,7 +33,8 @@ const main = (): void => {
         dateIsDst,
         canonicalLocale,
         getIanaTimezoneByLocaleFilterIdentifier,
-        getAbbrFromIanaTimeZone
+        getAbbrFromIanaTimeZone,
+        easterSpencer
     };
 }
 
