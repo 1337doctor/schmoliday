@@ -8,7 +8,7 @@ import {
     filterIntlTimezoneIdentifiers,
     dateIsDst,
     timezones,
-    getIanaTimezoneByLocaleAndIdentifier, getAbbrFromIanaTimeZone, getIanaTimezonesWithDST
+    getIanaTimezoneByLocaleFilterIdentifier, getAbbrFromIanaTimeZone, getIanaTimezonesWithDST
 } from "./util/datemate.ts";
 import {locale, canonicalLocale} from "./util/intl.ts";
 
@@ -31,7 +31,7 @@ const main = (): void => {
         getIanaTimezonesWithDST,
         dateIsDst,
         canonicalLocale,
-        getIanaTimezoneByLocaleAndIdentifier,
+        getIanaTimezoneByLocaleFilterIdentifier,
         getAbbrFromIanaTimeZone
     };
 }

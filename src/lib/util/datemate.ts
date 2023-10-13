@@ -16,16 +16,16 @@ interface Timezone {
 
 export const timezones: Timezone[] = data;
 export const getIanaTimezoneByCountryCode = (countrycode: string, tzList: Timezone[] = timezones): Timezone[] => {
+    if(countrycode.length < 2) {
+        console.info('getIanaTimezoneByCountryCode: countryCode hast at least to be 2 characters long.')
+        return [];
+    }
     return tzList.filter(
-        (timezone) => {
-            const countrycodeLowered = countrycode.toLowerCase();
-            return timezone.countryCodes.findIndex(
-                (code: string) => {
-                    const codeLowered = code.toLowerCase();
-                    return codeLowered === countrycodeLowered || countrycodeLowered.indexOf(codeLowered) !== -1;
-                }
+        (timezone) => timezone.countryCodes.findIndex(
+            (code: string) => countrycode.toLowerCase().indexOf(
+                code.toLowerCase()
             ) !== -1
-        }
+        ) !== -1
     );
 }
 export const getIanaTimezoneByIdentifier = (identifier: string, tzList: Timezone[] = timezones): Timezone[] => tzList.filter(
@@ -58,7 +58,7 @@ export const dateIsDst = (date: Date = new Date()): boolean => {
     return date.getTimezoneOffset() < stdOffset;
 }
 
-export const getIanaTimezoneByLocaleAndIdentifier = (identifier: string, locale: LocaleString = intlLocale): Timezone[] => {
+export const getIanaTimezoneByLocaleFilterIdentifier = (identifier: string, locale: LocaleString = intlLocale): Timezone[] => {
     return getIanaTimezoneByCountryCode(locale).filter(
         (timezone) => timezone.identifier.toLowerCase().indexOf(identifier.toLowerCase()) !== -1
     );
