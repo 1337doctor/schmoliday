@@ -17,3 +17,12 @@ export const easterSpencer = (year: number): Date => {
         monthIndex = n - 1;
     return new Date(year, monthIndex, day);
 }
+
+export const easterSundayCurrentYear: Date = easterSpencer(new Date().getFullYear());
+export const goodFriday = (easterSunday: Date = easterSundayCurrentYear): Date => {
+    return new Date(easterSunday.addDays(-2));
+}
+
+export const palmSunday = (easterSunday: Date = easterSundayCurrentYear): Date => {
+    return new Date(easterSunday.addDays(-7));
+}

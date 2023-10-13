@@ -11,7 +11,7 @@ import {
     getIanaTimezoneByLocaleFilterIdentifier, getAbbrFromIanaTimeZone, getIanaTimezonesWithDST
 } from "./util/datemate.ts";
 import {locale, canonicalLocale} from "./util/intl.ts";
-import { easterSpencer, goodFriday, easterSundayCurrentYear } from "./util/schmoliday.ts";
+import { easterSpencer, goodFriday, easterSundayCurrentYear, palmSunday } from "./util/schmoliday.ts";
 import './util/dateproto.ts';
 
 const main = (): void => {
@@ -37,6 +37,7 @@ const main = (): void => {
         getAbbrFromIanaTimeZone,
         easterSpencer,
         goodFriday,
+        palmSunday,
         easterSundayCurrentYear
     };
 }
