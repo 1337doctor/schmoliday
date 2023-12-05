@@ -1,5 +1,4 @@
 import data from '../data/timezones.json';
-import {locale as intlLocale, LocaleString} from "./intl.ts";
 
 interface Timezone {
     countryCodes: string[];
@@ -45,26 +44,8 @@ export const getIanaTimeZoneByAbbreviation = (abbr: string, tzList: Timezone[] =
         (entry) => entry?.toLowerCase() === abbr.toLowerCase()
     ) !== -1
 );
-// @ts-ignore
-export const getIntlTimezoneIdentifiers = (): string[] => Intl.supportedValuesOf('timeZone');
-export const filterIntlTimezoneIdentifiers = (needle: string): string[] => getIntlTimezoneIdentifiers().filter(
-    (entry) => entry.toLowerCase().indexOf(needle.toLowerCase()) !== -1
-);
-export const dateIsDst = (date: Date = new Date()): boolean => {
-    const january = new Date(date.getFullYear(), 0, 1);
-    const july = new Date(date.getFullYear(), 6, 1);
-    const stdOffset = Math.max(january.getTimezoneOffset(), july.getTimezoneOffset());
 
-    return date.getTimezoneOffset() < stdOffset;
-}
-
-export const getIanaTimezoneByLocaleFilterIdentifier = (identifier: string, locale: LocaleString = intlLocale): Timezone[] => {
-    return getIanaTimezoneByCountryCode(locale).filter(
-        (timezone) => timezone.identifier.toLowerCase().indexOf(identifier.toLowerCase()) !== -1
-    );
-}
-
-export const getAbbrFromIanaTimeZone = (timezone: Timezone, date: Date) => dateIsDst(date) && timezone.abbr.dst
+export const getAbbrFromIanaTimeZone = (timezone: Timezone, date: Date) => date.isDst() && timezone.abbr.dst
     ? timezone.abbr.dst : timezone.abbr.std;
 
 export const getIanaTimezonesWithoutDST = (): Timezone[] => timezones.filter(

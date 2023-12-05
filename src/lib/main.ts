@@ -3,14 +3,12 @@ import {
     getIanaTimezoneByIdentifier,
     getIanaTimeZoneAbbreviations,
     getIanaTimeZoneByAbbreviation,
-    getIntlTimezoneIdentifiers,
     getIanaTimezonesWithoutDST,
-    filterIntlTimezoneIdentifiers,
-    dateIsDst,
     timezones,
-    getIanaTimezoneByLocaleFilterIdentifier, getAbbrFromIanaTimeZone, getIanaTimezonesWithDST
+    getAbbrFromIanaTimeZone,
+    getIanaTimezonesWithDST
 } from "./util/datemate.ts";
-import {locale, canonicalLocale} from "./util/intl.ts";
+import {intlLocaleId, getIntlCanonicalLocaleId, getIntlTimezoneIdentifiers, filterIntlTimezoneIdentifiers, intlTimezone} from "./util/intl.ts";
 import { easterSpencer, goodFriday, easterSundayCurrentYear, palmSunday } from "./util/schmoliday.ts";
 import './util/dateproto.ts';
 
@@ -22,7 +20,7 @@ const main = (): void => {
     // @ts-ignore
     window.datemate = {
         timezones,
-        locale,
+        intlLocaleId,
         getIanaTimezoneByCountryCode,
         getIanaTimezoneByIdentifier,
         getIanaTimeZoneAbbreviations,
@@ -31,9 +29,8 @@ const main = (): void => {
         filterIntlTimezoneIdentifiers,
         getIanaTimezonesWithoutDST,
         getIanaTimezonesWithDST,
-        dateIsDst,
-        canonicalLocale,
-        getIanaTimezoneByLocaleFilterIdentifier,
+        getIntlCanonicalLocaleId,
+        intlTimezone,
         getAbbrFromIanaTimeZone,
         easterSpencer,
         goodFriday,

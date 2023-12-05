@@ -2,7 +2,17 @@ interface Date {
     addDays(days: number): Date;
     addYears(years: number): Date;
     addMonths(months: number): Date;
+    isDst(): boolean;
 }
+
+Date.prototype.isDst = function(): boolean {
+    const january = new Date(this.getFullYear(), 0, 1);
+    const july = new Date(this.getFullYear(), 6, 1);
+    const stdOffset = Math.max(january.getTimezoneOffset(), july.getTimezoneOffset());
+
+    return this.getTimezoneOffset() < stdOffset;
+}
+
 
 Date.prototype.addDays = function(days: number) {
     const date: Date = new Date(this.valueOf());
